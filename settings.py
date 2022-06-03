@@ -4,4 +4,5 @@ valid_tsym_2 = 'AZN'
 valid_fsym_3 = 'BTC,ETH'
 valid_tsym_3 = 'USD,EUR'
 valid_exchange = 'Kraken'
-
+valid_exchangeFsym = 'XXBT'
+valid_language = 'EN'

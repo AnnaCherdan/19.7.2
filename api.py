@@ -1,5 +1,5 @@
 import requests
-# import json
+import json
 
 
 class CryptocompareAn:
@@ -49,7 +49,7 @@ class CryptocompareAn:
         return status, result
 
     def get_generate_custom_average(self, fsym: str, tsym: str, e: str):
-        """Генерация средних данных по конвертируемой валютной паре."""
+        """Генерация средних данных по конвертируемой валютной паре для биржи Kraken."""
         res = requests.get(f'https://min-api.cryptocompare.com/data/generateAvg?fsym={fsym}&tsym={tsym}&e={e}')
         status = res.status_code
         result = ""
@@ -62,6 +62,61 @@ class CryptocompareAn:
     def get_mapping_from_symbol(self, fsym: str):
         """Сопоставление криптовалют по символьному наименованию."""
         res = requests.get(f'https://min-api.cryptocompare.com/data/v2/pair/mapping/fsym?fsym={fsym}')
+        status = res.status_code
+        result = ""
+        try:
+            result = res.json()
+        except:
+            result = res.text
+        return status, result
+
+    def get_mapping_exchange(self, e: str):
+        """Сопоставление различных валютных пар по бирже Kraken."""
+        res = requests.get(f'https://min-api.cryptocompare.com/data/v2/pair/mapping/exchange?e={e}')
+        status = res.status_code
+        result = ""
+        try:
+            result = res.json()
+        except:
+            result = res.text
+        return status, result
+
+    def get_mapping_exchange_from_symbol(self, fsym: str):
+        """Сопоставление биткоина разных стран с биржевым показателем."""
+        res = requests.get(f'https://min-api.cryptocompare.com/data/v2/pair/mapping/exchange/fsym?exchangeFsym={fsym}')
+        status = res.status_code
+        result = ""
+        try:
+            result = res.json()
+        except:
+            result = res.text
+        return status, result
+
+    def get_latest_news_articles(self, lang: str):
+        """Ссылки на новостные порталы, связанные с CryptoCompare."""
+        res = requests.get(f'https://min-api.cryptocompare.com/data/v2/news/?lang={lang}')
+        status = res.status_code
+        result = ""
+        try:
+            result = res.json()
+        except:
+            result = res.text
+        return status, result
+
+    def get_all_the_exchanges_and_trading_pairs(self):
+        """Список биржевых платформ и торговых площадок, интегрированных с CryptoCompare."""
+        res = requests.get(f'https://min-api.cryptocompare.com/data/v4/all/exchanges')
+        status = res.status_code
+        result = ""
+        try:
+            result = res.json()
+        except:
+            result = res.text
+        return status, result
+
+    def get_rate_limit(self):
+        """Лимит доступных запросов в текущем месяце, дне, часе, минуте и секунде."""
+        res = requests.get(f'https://min-api.cryptocompare.com/stats/rate/limit')
         status = res.status_code
         result = ""
         try:
