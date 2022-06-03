@@ -64,5 +64,3 @@ class TestCrypAn:
         status, result = cra.get_rate_limit()
         assert status == 200
         assert 'Data' in result
-
-
